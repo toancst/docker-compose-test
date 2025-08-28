@@ -1,0 +1,7 @@
+2025/08/28 17:13:45 Đã thêm watcher cho thư mục: storage
+2025/08/28 17:13:45 === Bắt đầu theo dõi thư mục: storage ===
+2025/08/28 17:14:02 [CREATE] storage/hihi | Size: 4096 bytes | Time: 2025-08-28 17:14:02
+2025/08/28 17:14:02 Đã thêm watcher cho thư mục: storage/hihi
+2025/08/28 17:14:13 [CREATE] storage/haha.tag | Size: 0 bytes | Time: 2025-08-28 17:14:13
+2025/08/28 17:14:40 Nhận tín hiệu dừng, đóng ứng dụng...
+2025/08/28 17:14:40 Ứng dụng đã dừng.

@@ -1,0 +1,291 @@
+version: '3.8'
+
+services:
+  # Alpine containers
+  alpine-316:
+    image: alpine:3.20
+    container_name: test_alpine_316
+    hostname: alpine316-host
+    networks:
+      - test-network
+      - alpine-network
+    environment:
+      - CONTAINER_TYPE=alpine
+      - VERSION=3.16
+      - TEST_VAR=alpine316_test
+    volumes:
+      - ./scripts:/scripts:ro
+      - alpine316_data:/data
+    command: >
+      sh -c "
+        echo '=== ALPINE 3.16 CONTAINER INFO ===';
+        echo 'Container Name: test_alpine_316';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: alpine:3.20';
+        echo 'OS Info:' \$$(cat /etc/os-release | head -2);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -i);
+        echo 'Network Interfaces:';
+        ip addr show;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps aux;
+        echo 'Memory Info:';
+        free -h;
+        echo 'Disk Usage:';
+        du -sh /*;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+  alpine-317:
+    image: alpine:3.17
+    container_name: test_alpine_317
+    hostname: alpine317-host
+    networks:
+      - test-network
+      - alpine-network
+    environment:
+      - CONTAINER_TYPE=alpine
+      - VERSION=3.17
+      - TEST_VAR=alpine317_test
+    volumes:
+      - ./scripts:/scripts:ro
+      - alpine317_data:/data
+    command: >
+      sh -c "
+        echo '=== ALPINE 3.17 CONTAINER INFO ===';
+        echo 'Container Name: test_alpine_317';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: alpine:3.17';
+        echo 'OS Info:' \$$(cat /etc/os-release | head -2);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -i);
+        echo 'Network Interfaces:';
+        ip addr show;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps aux;
+        echo 'Memory Info:';
+        free -h;
+        echo 'Disk Usage:';
+        du -sh /*;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+  # Ubuntu containers
+  ubuntu-21:
+    image: ubuntu:21.04
+    container_name: test_ubuntu_21
+    hostname: ubuntu21-host
+    networks:
+      - test-network
+      - ubuntu-network
+    environment:
+      - CONTAINER_TYPE=ubuntu
+      - VERSION=21.04
+      - TEST_VAR=ubuntu21_test
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - ./scripts:/scripts:ro
+      - ubuntu21_data:/data
+    command: >
+      bash -c "
+        apt-get update -qq && apt-get install -y -qq procps net-tools iproute2 > /dev/null 2>&1;
+        echo '=== UBUNTU 21.04 CONTAINER INFO ===';
+        echo 'Container Name: test_ubuntu_21';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: ubuntu:21.04';
+        echo 'OS Info:' \$$(cat /etc/os-release | head -3);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -I);
+        echo 'Network Interfaces:';
+        ip addr show;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME|DEBIAN)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps aux;
+        echo 'Memory Info:';
+        free -h;
+        echo 'Disk Usage:';
+        du -sh /*;
+        echo 'Package Info:';
+        dpkg -l | head -10;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+  ubuntu-22:
+    image: ubuntu:22.04
+    container_name: test_ubuntu_22
+    hostname: ubuntu22-host
+    networks:
+      - test-network
+      - ubuntu-network
+    environment:
+      - CONTAINER_TYPE=ubuntu
+      - VERSION=22.04
+      - TEST_VAR=ubuntu22_test
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - ./scripts:/scripts:ro
+      - ubuntu22_data:/data
+    command: >
+      bash -c "
+        apt-get update -qq && apt-get install -y -qq procps net-tools iproute2 > /dev/null 2>&1;
+        echo '=== UBUNTU 22.04 CONTAINER INFO ===';
+        echo 'Container Name: test_ubuntu_22';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: ubuntu:22.04';
+        echo 'OS Info:' \$$(cat /etc/os-release | head -3);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -I);
+        echo 'Network Interfaces:';
+        ip addr show;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME|DEBIAN)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps aux;
+        echo 'Memory Info:';
+        free -h;
+        echo 'Disk Usage:';
+        du -sh /*;
+        echo 'Package Info:';
+        dpkg -l | head -10;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+  # Busybox containers
+  busybox-11:
+    image: busybox:1.35.0
+    container_name: test_busybox_135
+    hostname: busybox135-host
+    networks:
+      - test-network
+      - busybox-network
+    environment:
+      - CONTAINER_TYPE=busybox
+      - VERSION=1.35.0
+      - TEST_VAR=busybox135_test
+    volumes:
+      - ./scripts:/scripts:ro
+      - busybox135_data:/data
+    command: >
+      sh -c "
+        echo '=== BUSYBOX 1.35.0 CONTAINER INFO ===';
+        echo 'Container Name: test_busybox_135';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: busybox:1.35.0';
+        echo 'Busybox Version:' \$$(busybox | head -1);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -i);
+        echo 'Network Interfaces:';
+        ip addr show 2>/dev/null || ifconfig;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps;
+        echo 'Memory Info:';
+        free 2>/dev/null || echo 'free command not available';
+        echo 'Available Commands:';
+        busybox --list | head -20;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+  busybox-12:
+    image: busybox:1.36.0
+    container_name: test_busybox_136
+    hostname: busybox136-host
+    networks:
+      - test-network
+      - busybox-network
+    environment:
+      - CONTAINER_TYPE=busybox
+      - VERSION=1.36.0
+      - TEST_VAR=busybox136_test
+    volumes:
+      - ./scripts:/scripts:ro
+      - busybox136_data:/data
+    command: >
+      sh -c "
+        echo '=== BUSYBOX 1.36.0 CONTAINER INFO ===';
+        echo 'Container Name: test_busybox_136';
+        echo 'Hostname:' \$$(hostname);
+        echo 'Image: busybox:1.36.0';
+        echo 'Busybox Version:' \$$(busybox | head -1);
+        echo 'Kernel:' \$$(uname -a);
+        echo 'IP Address:' \$$(hostname -i);
+        echo 'Network Interfaces:';
+        ip addr show 2>/dev/null || ifconfig;
+        echo 'Environment Variables:';
+        env | grep -E '(CONTAINER_TYPE|VERSION|TEST_VAR|HOSTNAME)';
+        echo 'Mounted Volumes:';
+        df -h;
+        echo 'Process List:';
+        ps;
+        echo 'Memory Info:';
+        free 2>/dev/null || echo 'free command not available';
+        echo 'Available Commands:';
+        busybox --list | head -20;
+        echo '========================';
+        sleep 3600
+      "
+    restart: unless-stopped
+
+# Networks
+networks:
+  test-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+  alpine-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+  ubuntu-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+  busybox-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
+
+# Volumes
+volumes:
+  alpine316_data:
+    driver: local
+  alpine317_data:
+    driver: local
+  ubuntu21_data:
+    driver: local
+  ubuntu22_data:
+    driver: local
+  busybox135_data:
+    driver: local
+  busybox136_data:
+    driver: local
