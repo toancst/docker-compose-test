@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Alpine containers
   alpine-316:
-    image: alpine:3.19
+    image: alpine:3.20
     container_name: test_alpine_316
     hostname: alpine316-host
     networks:
@@ -21,7 +21,7 @@ services:
         echo '=== ALPINE 3.16 CONTAINER INFO ===';
         echo 'Container Name: test_alpine_316';
         echo 'Hostname:' \$$(hostname);
-        echo 'Image: alpine:3.19';
+        echo 'Image: alpine:3.20';
         echo 'OS Info:' \$$(cat /etc/os-release | head -2);
         echo 'Kernel:' \$$(uname -a);
         echo 'IP Address:' \$$(hostname -i);
