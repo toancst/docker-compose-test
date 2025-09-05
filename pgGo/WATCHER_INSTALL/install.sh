@@ -3,8 +3,8 @@
 # --- Cấu hình ---
 PROGRAM_NAME="pgGo_watcher"
 INSTALL_DIR="/opt/${PROGRAM_NAME}"
-WATCH_DIR="/home/developer/cpt/pgGo/storage"
-LOG_DIR="/home/developer/cpt/pgGo/log"
+WATCH_DIR="./pgGo/storage"
+LOG_DIR="./pgGo/log"
 SERVICE_USER="pg_watcher" # Người dùng dành riêng cho dịch vụ
 SERVICE_GROUP="pg_watcher" # Nhóm dành riêng cho dịch vụ
 SERVICE_FILE="/etc/systemd/system/${PROGRAM_NAME}.service"
